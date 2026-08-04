@@ -1,0 +1,49 @@
+name: Deploy Landingpages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.2.2
+
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+
+          script: |
+            cd /var/www/landingpages
+
+            git fetch origin
+            git reset --hard origin/main
+
+            composer install \
+              --no-dev \
+              --prefer-dist \
+              --optimize-autoloader \
+              --no-interaction
+
+            npm ci
+
+            npm run build
+
+            php artisan optimize:clear
+
+            php artisan optimize
+
+            sudo chown -R www-data:www-data storage bootstrap/cache
+
+            sudo chmod -R 775 storage bootstrap/cache
+
+            echo "Deploy Success"
