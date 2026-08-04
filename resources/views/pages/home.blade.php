@@ -11,7 +11,7 @@ Navbar
 
         <a href="/" class="text-3xl font-black tracking-widest">
 
-            VISPA
+            BELANDA
 
         </a>
 
