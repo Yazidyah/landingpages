@@ -11,7 +11,7 @@ Navbar
 
         <a href="/" class="text-3xl font-black tracking-widest">
 
-            BELANDA
+            VISPA
 
         </a>
 
@@ -74,7 +74,7 @@ data-aos="fade-right"
 
 class="inline-flex rounded-full border border-cyan-400/40 bg-cyan-500/10 px-5 py-2 text-sm">
 
-Vispa Signature Collection
+Vispa Super Collection
 
 </span>
 
